@@ -1,0 +1,17 @@
+{
+  "name": "test-examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive test"
+  },
+  "author": "",
+  "license": "Apache v2",
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "proxyquire": "^1.4.0",
+    "sinon": "^1.14.1",
+    "sinon-chai": "^2.7.0"
+  }
+}
