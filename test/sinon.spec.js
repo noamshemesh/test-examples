@@ -3,14 +3,14 @@ var expect = chai.expect;
 var sinonChai = require("sinon-chai");
 chai.use(sinonChai);
 
-var IncreaseFactory = require('../src/increase');
+var NumberFactory = require('../pre/number');
 
 describe('Expect examples', function () {
   var tested;
 
-  describe('Increase', function () {
+  describe('Number', function () {
     beforeEach(function () {
-      tested = new IncreaseFactory();
+      tested = new NumberFactory();
     });
 
     it('should start with value 0', function () {
@@ -31,30 +31,30 @@ describe('Expect examples', function () {
     var sinon = require('sinon');
 
     it('should call increase when growing up', function () {
-      var spy = sinon.spy(new IncreaseFactory().increase);
-      tested = require('../src/person')({ ageIncrease: spy });
+      var spy = sinon.spy(new NumberFactory().increase);
+      tested = require('../pre/person')({ ageIncrease: spy });
       tested.growUp();
 
-      expect(spy).to.be.called.once;
+      expect(spy).to.be.calledOnce;
     });
 
     it('should not call increase when initializing', function () {
-      var stub = sinon.stub(new IncreaseFactory(), 'increase').throws();
-      tested = require('../src/person')({ ageIncrease: stub });
+      var stub = sinon.stub(new NumberFactory(), 'increase').throws();
+      tested = require('../pre/person')({ ageIncrease: stub });
 
       expect(stub).to.not.be.called;
     });
 
     it('should call increase twice when growing up by 2 years', function () {
-      var increaser = new IncreaseFactory();
+      var increaser = new NumberFactory();
       var mock = sinon.mock(increaser);
-      var expectation = mock.expects('increase').twice().onFirstCall().returns(1).onSecondCall().returns(2);
+      var expectation = mock.expects('increase').twice().onFirstCall().returns(4).onSecondCall().returns(20);
 
-      tested = require('../src/person')({ ageIncrease: increaser.increase });
-      tested.growUp();
-      tested.growUp();
+      tested = require('../pre/person')({ ageIncrease: increaser.increase });
+      expect(tested.growUp()).to.equal(4);
+      expect(tested.growUp()).to.equal(20);
 
       mock.verify();
     });
-  })
+  });
 });

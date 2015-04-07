@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive test"
+    "test": "mocha --recursive test",
+    "coverage": "istanbul cover --include-all-sources --preserve-comments --report html _mocha -- test/ --recursive"
   },
   "author": "",
   "license": "Apache v2",
   "devDependencies": {
     "chai": "^2.2.0",
+    "mocha": "^2.2.1",
     "proxyquire": "^1.4.0",
     "sinon": "^1.14.1",
     "sinon-chai": "^2.7.0"

@@ -15,8 +15,9 @@ describe('Expect examples', function () {
     it('should not call increase when initializing', function () {
       var increaser = new IncreaseFactory();
       var stub = sinon.stub(increaser, 'increase').returns(1);
+      var Person = proxyquire('../src/person', { './increase': function () { return increaser } });
 
-      tested = proxyquire('../src/person', { './increase': function () { return increaser } })();
+      tested = new Person();
       tested.growUp();
 
       stub.should.have.been.called.once;
@@ -26,8 +27,9 @@ describe('Expect examples', function () {
       var increaser = new IncreaseFactory();
       var mock = sinon.mock(increaser);
       var expectation = mock.expects('increase').twice().onFirstCall().returns(1).onSecondCall().returns(2);
+      var Person = proxyquire('../src/person', { './increase': function () { return increaser } });
 
-      tested = proxyquire('../src/person', { './increase': function () { return increaser } })();
+      tested = new Person();
       tested.growUp();
       tested.growUp();
 
