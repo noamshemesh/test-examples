@@ -4,7 +4,7 @@ chai.should();
 var sinonChai = require("sinon-chai");
 chai.use(sinonChai);
 
-var IncreaseFactory = require('../pre/number');
+var IncreaseFactory = require('../src/number');
 
 describe('Expect examples', function () {
   var tested;
@@ -15,7 +15,7 @@ describe('Expect examples', function () {
     it('should not call increase when initializing', function () {
       var increaser = new IncreaseFactory();
       var stub = sinon.stub(increaser, 'increase').returns(1);
-      var Person = proxyquire('../pre/person', { './number': function () { return increaser } });
+      var Person = proxyquire('../src/person', { './number': function () { return increaser } });
 
       tested = new Person();
       tested.growUp();
@@ -27,7 +27,7 @@ describe('Expect examples', function () {
       var increaser = new IncreaseFactory();
       var mock = sinon.mock(increaser);
       var expectation = mock.expects('increase').twice().onFirstCall().returns(1).onSecondCall().returns(2);
-      var Person = proxyquire('../pre/person', { './number': function () { return increaser } });
+      var Person = proxyquire('../src/person', { './number': function () { return increaser } });
 
       tested = new Person();
       tested.growUp();

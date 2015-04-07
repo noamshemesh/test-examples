@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var NumberFactory = require('../pre/number');
+var NumberFactory = require('../src/number');
 
 describe('Expect examples', function () {
   var tested;

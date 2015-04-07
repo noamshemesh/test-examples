@@ -3,7 +3,7 @@ var expect = chai.expect;
 var sinonChai = require("sinon-chai");
 chai.use(sinonChai);
 
-var NumberFactory = require('../pre/number');
+var NumberFactory = require('../src/number');
 
 describe('Expect examples', function () {
   var tested;
@@ -13,7 +13,7 @@ describe('Expect examples', function () {
 
     it('should call increase when growing up', function () {
       var spy = sinon.spy(new NumberFactory().increase);
-      tested = require('../pre/person')({ ageIncrease: spy });
+      tested = require('../src/person')({ ageIncrease: spy });
       tested.growUp();
 
       expect(spy).to.be.calledOnce;
@@ -21,7 +21,7 @@ describe('Expect examples', function () {
 
     it('should not call increase when initializing', function () {
       var stub = sinon.stub(new NumberFactory(), 'increase').throws();
-      tested = require('../pre/person')({ ageIncrease: stub });
+      tested = require('../src/person')({ ageIncrease: stub });
 
       expect(stub).to.not.be.called;
     });
@@ -31,7 +31,7 @@ describe('Expect examples', function () {
       var mock = sinon.mock(increaser);
       var expectation = mock.expects('increase').twice().onFirstCall().returns(4).onSecondCall().returns(20);
 
-      tested = require('../pre/person')({ ageIncrease: increaser.increase });
+      tested = require('../src/person')({ ageIncrease: increaser.increase });
       expect(tested.growUp()).to.equal(4);
       expect(tested.growUp()).to.equal(20);
 
